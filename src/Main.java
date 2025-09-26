@@ -7,10 +7,6 @@ import java.sql.Connection;
 public class Main {
     public static void main(String[] args) {
 
-        String url = "jdbc:mysql://localhost:3306/tu_base";
-        String usuario = "tu_usuario";
-        String contrasinal = "tu_contrasinal";
-
         dbConnection dbConn = new dbConnection();
         Connection conn = dbConn.conectar();;
     }
