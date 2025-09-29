@@ -1,4 +1,5 @@
 import conexion.dbConnection;
+import servicios.ServiciosAnime;
 
 import java.sql.Connection;
 
@@ -9,5 +10,15 @@ public class Main {
 
         dbConnection dbConn = new dbConnection();
         Connection conn = dbConn.conectar();;
+        if (conn != null) {
+            System.out.println("Conexión exitosa a la base de datos.");
+        } else {
+            System.out.println("Fallo en la conexión a la base de datos.");
+        }
+        //ServiciosAnime.insertarEntrada("Naruto", "Un ninja que busca reconocimiento", "2002/01/01", 9.0);
+        ServiciosAnime.ejecutarSQL();
+        ServiciosAnime.ejecutarConsultaSegunPuntuacion(95.0);
+        ServiciosAnime.actualizarEntrada();
     }
+
 }

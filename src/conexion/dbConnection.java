@@ -4,7 +4,7 @@ import java.sql.*;
 
 public class dbConnection {
 
-    public Connection conectar() {
+    public static Connection conectar() {
         Connection conn = null;
         String url = "jdbc:postgresql://10.0.9.104:5432/probas";
         String usuario = "postgres";
