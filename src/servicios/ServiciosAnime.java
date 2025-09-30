@@ -73,8 +73,8 @@ public class ServiciosAnime {
         }
     }
 
-    public static void actualizarEntrada(int id, String novoNome, String novaDescripcion, String novaData, double novaPuntuacion) {
-        String sql = "UPDATE anime SET nome = ?, descripcion = ?, data = ?, puntuacion = ? WHERE id = ?";
+    public static void actualizarEntrada(String nombre, String novoNome, String novaDescripcion, String novaData, double novaPuntuacion) {
+        String sql = "UPDATE anime SET nome = ?, descripcion = ?, data = ?, puntuacion = ? WHERE nome = ?";
         try (Connection conn = dbConnection.conectar();
              PreparedStatement toUpdate = conn.prepareStatement(sql)) {
 
@@ -82,13 +82,13 @@ public class ServiciosAnime {
             toUpdate.setString(2, novaDescripcion);
             toUpdate.setDate(3, new ServiciosAnime().stringToDate(novaData));
             toUpdate.setDouble(4, novaPuntuacion);
-            toUpdate.setInt(5, id);
+            toUpdate.setString(5, nombre);
 
             int filasAfectadas = toUpdate.executeUpdate();
             if (filasAfectadas > 0) {
                 System.out.println("Entrada actualizada correctamente.");
             } else {
-                System.out.println("No se encontró ninguna entrada con el ID proporcionado.");
+                System.out.println("No se encontró ninguna entrada con el nombre proporcionado.");
             }
         } catch (SQLException e) {
             System.out.println("Error al actualizar la entrada: " + e.getMessage());

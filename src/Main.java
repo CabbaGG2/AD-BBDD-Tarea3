@@ -18,7 +18,7 @@ public class Main {
         //ServiciosAnime.insertarEntrada("Naruto", "Un ninja que busca reconocimiento", "2002/01/01", 9.0);
         ServiciosAnime.ejecutarSQL();
         ServiciosAnime.ejecutarConsultaSegunPuntuacion(95.0);
-        ServiciosAnime.actualizarEntrada();
+        ServiciosAnime.actualizarEntrada("Naruto", "Naruto Shippuden", "La continuación de Naruto", "2007/02/15", 9.5);
     }
 
 }
