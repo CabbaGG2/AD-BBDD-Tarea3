@@ -15,10 +15,12 @@ public class Main {
         } else {
             System.out.println("Fallo en la conexión a la base de datos.");
         }
-        //ServiciosAnime.insertarEntrada("Naruto", "Un ninja que busca reconocimiento", "2002/01/01", 9.0);
+        ServiciosAnime.insertarEntrada("Naruto", "Un ninja que busca reconocimiento", "2002/01/01", 9.0);
         ServiciosAnime.ejecutarSQL();
-        ServiciosAnime.ejecutarConsultaSegunPuntuacion(95.0);
         ServiciosAnime.actualizarEntrada("Naruto", "Naruto Shippuden", "La continuación de Naruto", "2007/02/15", 9.5);
+        ServiciosAnime.ejecutarConsultaSegunNombre("Naruto Shippuden");
+        ServiciosAnime.eliminarEntrada("Naruto Shippuden");
+        ServiciosAnime.ejecutarSQL();
     }
 
 }

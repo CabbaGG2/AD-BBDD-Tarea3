@@ -53,12 +53,12 @@ public class ServiciosAnime {
         }
     }
 
-    public static void ejecutarConsultaSegunPuntuacion(double puntuacionMinima) {
-        String sql = "SELECT * FROM anime WHERE puntuacion >= ?";
+    public static void ejecutarConsultaSegunNombre(String nombre) {
+        String sql = "SELECT * FROM anime WHERE nome = ?";
         try (Connection conn = dbConnection.conectar();
              PreparedStatement toRead = conn.prepareStatement(sql)) {
 
-            toRead.setDouble(1, puntuacionMinima);
+            toRead.setString(1, nombre);
             try (ResultSet resultSet = toRead.executeQuery()) {
                 while (resultSet.next()) {
                     System.out.println(
@@ -76,15 +76,15 @@ public class ServiciosAnime {
     public static void actualizarEntrada(String nombre, String novoNome, String novaDescripcion, String novaData, double novaPuntuacion) {
         String sql = "UPDATE anime SET nome = ?, descripcion = ?, data = ?, puntuacion = ? WHERE nome = ?";
         try (Connection conn = dbConnection.conectar();
-             PreparedStatement toUpdate = conn.prepareStatement(sql)) {
+             PreparedStatement actualizar = conn.prepareStatement(sql)) {
 
-            toUpdate.setString(1, novoNome);
-            toUpdate.setString(2, novaDescripcion);
-            toUpdate.setDate(3, new ServiciosAnime().stringToDate(novaData));
-            toUpdate.setDouble(4, novaPuntuacion);
-            toUpdate.setString(5, nombre);
+            actualizar.setString(1, novoNome);
+            actualizar.setString(2, novaDescripcion);
+            actualizar.setDate(3, new ServiciosAnime().stringToDate(novaData));
+            actualizar.setDouble(4, novaPuntuacion);
+            actualizar.setString(5, nombre);
 
-            int filasAfectadas = toUpdate.executeUpdate();
+            int filasAfectadas = actualizar.executeUpdate();
             if (filasAfectadas > 0) {
                 System.out.println("Entrada actualizada correctamente.");
             } else {
@@ -92,6 +92,23 @@ public class ServiciosAnime {
             }
         } catch (SQLException e) {
             System.out.println("Error al actualizar la entrada: " + e.getMessage());
+        }
+    }
+
+    public static void eliminarEntrada(String nome) {
+        String sql = "DELETE FROM anime WHERE nome = ?";
+        try (Connection conn = dbConnection.conectar();
+             PreparedStatement toDelete = conn.prepareStatement(sql)) {
+
+            toDelete.setString(1, nome);
+            int filasAfectadas = toDelete.executeUpdate();
+            if (filasAfectadas > 0) {
+                System.out.println("Entrada eliminada correctamente.");
+            } else {
+                System.out.println("No se encontró ninguna entrada con el nombre proporcionado.");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al eliminar la entrada: " + e.getMessage());
         }
     }
 
